@@ -1,0 +1,6 @@
+vendor/
+bower_components/
+.idea/
+web/
+bin/bowerphp
+bin/phpunit

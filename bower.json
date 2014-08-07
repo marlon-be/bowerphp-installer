@@ -1,0 +1,51 @@
+{
+  "name": "m4-eloket",
+  "version": "0.0.0",
+  "homepage": "https://github.com/marlon-be/m4-eloket",
+  "authors": [
+    "jelte <jelte@marlon.be>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2",
+    "react": "git://github.com/reactjs/react-bower.git#~0.11.0",
+    "react-loader": "git://github.com/jelte/react-loader.git#master"
+  },
+  "install": {
+    "path": {
+      "js": "web/assets/js",
+      "css": "web/assets/css",
+      "map": "web/assets/css",
+      "eot": "web/assets/fonts",
+      "svg": "web/assets/fonts",
+      "ttf": "web/assets/fonts",
+      "woff": "web/assets/fonts"
+    },
+    "sources": {
+      "bootstrap": [
+        "bower_components/bootstrap/dist/css/*.min.css",
+        "bower_components/bootstrap/dist/js/*.min.js",
+        "bower_components/bootstrap/dist/fonts/**"
+      ],
+      "jquery": [
+        "bower_components/jquery/dist/*.min.js"
+      ],
+      "react": [
+        "bower_components/react/JSXTransformer.js",
+        "bower_components/react/react.js",
+        "bower_components/react/react.min.js"
+      ],
+      "react-loader": [
+        "bower_components/react-loader/*.js"
+      ]
+    }
+  }
+}

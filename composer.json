@@ -1,0 +1,48 @@
+{
+    "name": "jelte/bowerphp-installer",
+    "description": "An implementation of bower-installer in PHP",
+    "keywords": ["package", "dependency", "frontend"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jelte Steijaert",
+            "email": "jelte@khepri.be"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/jelte/bowserphp-installer/issues"
+    },
+    "repositories": [
+        {
+            "type" : "git",
+            "url": "git@github.com:jelte/bowerphp.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/console": "~2.3",
+        "symfony/finder": "~2.2",
+        "symfony/filesystem": "~2.1",
+        "symfony/process": "~2.1",
+        "camspiers/json-pretty": "1.0.*",
+        "beelab/bowerphp": "dev-master"
+    },
+    "require-dev":{
+        "ext-phar": "*",
+        "phpunit/phpunit": "4.1.*",
+        "mockery/mockery": "~0.9.2@dev"
+    },
+    "autoload": {
+        "psr-0": { "BowerInstaller": "src/" }
+    },
+    "bin": ["bin/bowerphp-installer"],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
