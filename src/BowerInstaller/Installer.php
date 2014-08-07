@@ -13,12 +13,13 @@ use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\Process;
 
 class Installer {
-    protected $config, $finder, $filesystem, $output;
+    protected $config, $finder, $filesystem, $output, $installDir;
 
     public function __construct(ConfigInterface $config, Finder $finder, Filesystem $filesystem, OutputInterface $output)
     {
         $this->config = $config->getBowerFileContent();
 
+        $this->installDir = $config->getInstallDir();
         $this->finder = $finder;
         $this->filesystem = $filesystem;
         $this->output = $output;
@@ -36,7 +37,7 @@ class Installer {
                     $finder->files()->name($filename)->in($path);
 
                     foreach ($finder as $file) {
-                        $this->copyAsset($file);
+                        $this->copyAsset($file, $lib);
                     }
                 }
             }
@@ -45,10 +46,10 @@ class Installer {
 
     }
 
-    public function copyAsset(SplFileInfo $file)
+    public function copyAsset(SplFileInfo $file, $lib)
     {
         if ( isset($this->config['install']['path'][$file->getExtension()]) ) {
-            $path = $this->config['install']['path'][$file->getExtension()];
+            $path = $this->config['install']['path'][$file->getExtension()].'/'.$lib;
             if ( !$this->filesystem->exists($path) ) {
                 $this->filesystem->mkdir($path, 0755);
             }
@@ -56,8 +57,14 @@ class Installer {
             $target = $path.'/'.$file->getFilename();
             $this->filesystem->copy($file->getRealPath(), $target, true);
             if ( $this->filesystem->exists($target) ) {
-                $this->output->writeln(sprintf('<process-name> bower-installer </process-name> Copied %s to %s', str_replace(getcwd() . '/', '', $file->getRealPath()), $target));
+                $this->output->writeln(sprintf('<process-name> bower-installer </process-name> Copied %s to %s', str_replace(getcwd() . '/', '', $file->getRealPath()), $path));
             }
         }
+    }
+
+    public function removeBowerCache()
+    {
+        $this->output->writeln(sprintf('<process-name> bower-installer </process-name> Removed %s', $this->installDir));
+        $this->filesystem->remove($this->installDir);
     }
 } 

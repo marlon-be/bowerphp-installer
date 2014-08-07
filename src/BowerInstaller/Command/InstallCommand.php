@@ -26,7 +26,7 @@ class InstallCommand extends Command
         $this
             ->setName('install')
             ->setDescription('Install specific files from bower packages to dirs')
-            ->addOption('remove', 'r', InputOption::VALUE_NONE, 'Remove bower cache when done')
+            ->addOption('remove', null, InputOption::VALUE_NONE, 'Remove bower cache when done')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command reads the bower.json file from
 the current directory, processes it, and downloads and installs all the
@@ -87,5 +87,9 @@ EOT
         $installer      = new Installer($config, new Finder(), $filesystem, $output);
 
         $installer->installAssets();
+
+        if ( $input->getOption('remove') ) {
+            $installer->removeBowerCache();
+        }
     }
 }
