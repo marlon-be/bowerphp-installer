@@ -4,3 +4,4 @@ bower_components/
 web/
 bin/bowerphp
 bin/phpunit
+bower.json
