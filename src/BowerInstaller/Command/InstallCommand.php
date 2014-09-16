@@ -65,7 +65,7 @@ EOT
 
     protected function runBower(InputInterface $input, OutputInterface $output)
     {
-        $process = new Process('vendor/bin/bowerphp install');
+        $process = new Process('bin/bowerphp install');
         $output->writeln('<comment>Installing Bower</comment>');
         $process->run(function($type, $buffer) use ($output) {
             if (strpos($buffer, 'install')) {
