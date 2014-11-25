@@ -44,7 +44,7 @@ to bower.json file (only if bower.json file already exists).
 EOT
             )
         ;
-        $this->addOption('bin', null, InputOption::VALUE_OPTIONAL,'Bower Bin', 'bin/bowerphp');
+        $this->addOption('bower', null, InputOption::VALUE_OPTIONAL,'Bower Bin', 'bin/bowerphp');
         $this->addOption('skip-bower', null, InputOption::VALUE_NONE, 'Skip bower install');
     }
 
@@ -66,7 +66,7 @@ EOT
 
     protected function runBower(InputInterface $input, OutputInterface $output)
     {
-        $process = new Process($input->getOption('bin').' install');
+        $process = new Process($input->getOption('bower').' install');
         $output->writeln('<comment>Installing Bower</comment>');
         $process->run(function($type, $buffer) use ($output) {
             if (strpos($buffer, 'install')) {
