@@ -45,6 +45,7 @@ EOT
             )
         ;
         $this->addOption('bower', null, InputOption::VALUE_OPTIONAL,'Bower Bin', 'bin/bowerphp');
+        $this->addOption('token', null, InputOption::VALUE_OPTIONAL, 'Install token');
         $this->addOption('skip-bower', null, InputOption::VALUE_NONE, 'Skip bower install');
     }
 
@@ -52,6 +53,9 @@ EOT
     {
         $this->initOutputStyles($output);
 
+        if ( $input->getOption('token') ) {
+            putenv('BOWERPHP_TOKEN='.$input->getOption('token'));
+        }
         if ( !$input->getOption('skip-bower') ) {
             $this->runBower($input, $output);
         }
