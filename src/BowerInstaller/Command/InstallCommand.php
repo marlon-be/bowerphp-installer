@@ -67,7 +67,7 @@ EOT
 
     protected function runBower(InputInterface $input, OutputInterface $output)
     {
-        $env = array();
+        $env = array('HOME' => getenv('HOME'));
 
         if ( $input->getOption('token') ) {
             $env['BOWERPHP_TOKEN'] = $input->getOption('token');
@@ -75,11 +75,12 @@ EOT
         $process = new Process($input->getOption('bower').' install', null, $env);
         $output->writeln('<comment>Installing Bower</comment>');
         $process->run(function($type, $buffer) use ($output) {
-            if (strpos($buffer, 'install')) {
+
+            //if (strpos($buffer, 'install')) {
                 $buffer = str_replace('install', '<info>install</info>', $buffer);
                 $buffer = str_replace('bower', '<process-name> bower</process-name>', $buffer);
                 $output->write($buffer);
-            }
+            //}
         });
         if (!$process->isSuccessful()) {
             throw new \RuntimeException('Failed to complete bower install');
