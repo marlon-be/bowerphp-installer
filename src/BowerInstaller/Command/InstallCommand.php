@@ -53,9 +53,6 @@ EOT
     {
         $this->initOutputStyles($output);
 
-        if ( $input->getOption('token') ) {
-            putenv('BOWERPHP_TOKEN='.$input->getOption('token'));
-        }
         if ( !$input->getOption('skip-bower') ) {
             $this->runBower($input, $output);
         }
@@ -70,7 +67,12 @@ EOT
 
     protected function runBower(InputInterface $input, OutputInterface $output)
     {
-        $process = new Process($input->getOption('bower').' install');
+        $env = array();
+
+        if ( $input->getOption('token') ) {
+            $env['BOWERPHP_TOKEN'] = $input->getOption('token');
+        }
+        $process = new Process($input->getOption('bower').' install', null, $env);
         $output->writeln('<comment>Installing Bower</comment>');
         $process->run(function($type, $buffer) use ($output) {
             if (strpos($buffer, 'install')) {
