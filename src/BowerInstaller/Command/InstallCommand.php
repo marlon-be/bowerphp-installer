@@ -77,18 +77,14 @@ EOT
         $process->run(function($type, $buffer) use ($output) {
             if (strpos($buffer, 'install')) {
                 $buffer = str_replace('install', '<info>install</info>', $buffer);
-                $buffer = str_replace('bower', '<process-name> bower</process-name>', $buffer);
+                $buffer = str_replace('bower ', '<process-name> bower</process-name> ', $buffer);
                 $output->write($buffer);
             }
         });
         if (!$process->isSuccessful()) {
+            print($process->getErrorOutput());
             throw new \RuntimeException('Failed to complete bower install');
         }
-    }
-
-    function __call($name, $arguments)
-    {
-        // TODO: Implement __call() method.
     }
 
     public function doInstallerPass(InputInterface $input, OutputInterface $output)
