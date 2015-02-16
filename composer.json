@@ -13,12 +13,6 @@
     "support": {
         "issues": "https://github.com/jelte/bowserphp-installer/issues"
     },
-    "repositories": [
-        {
-            "type" : "git",
-            "url": "git@github.com:jelte/bowerphp.git"
-        }
-    ],
     "require": {
         "php": ">=5.3.2",
         "symfony/console": "~2.3",
