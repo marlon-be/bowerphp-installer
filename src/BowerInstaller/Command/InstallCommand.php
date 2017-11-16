@@ -72,7 +72,7 @@ EOT
         if ( $input->getOption('token') ) {
             $env['BOWERPHP_TOKEN'] = $input->getOption('token');
         }
-        $process = new Process($input->getOption('bower').' install', null, $env);
+        $process = new Process($input->getOption('bower').' install', null, $env, null, null);
         $output->writeln('<comment>Installing Bower</comment>');
         $process->run(function($type, $buffer) use ($output) {
             if (strpos($buffer, 'install')) {
